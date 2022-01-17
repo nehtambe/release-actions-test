@@ -33,60 +33,60 @@ jobs:
   deploy_chime_prod_demo:
     needs: publish
     name: Prod - ChimeSDKMeetings Client - Deploy the Serverless Meeting Demos
-      runs-on: ubuntu-latest
-      env:
-        AWS_DEFAULT_REGION: us-east-1
-        AWS_DEFAULT_OUTPUT: text
-        NAME: ChimeProd
-      steps:
-        - run: echo ${{steps.npm_tag.outputs.npm_tag}}
-        - name: Configure AWS Credentials
-          uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
-            aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-            aws-region: us-east-1
-        - name: Checkout Package
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-        - name: Install the Chime SDK
-          run: |
-            current_version=$(.github/script/get-current-version)
-            cd demos/browser
-            npm uninstall amazon-chime-sdk-js
-            npm install ../../amazon-chime-sdk-js-$current_version.tgz
-        - name: Install SAM CLI
-          run: script/github-action-awscli-installation
-        - name: Run Deployment Script
-          run: script/postrelease
+    runs-on: ubuntu-latest
+    env:
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_DEFAULT_OUTPUT: text
+      NAME: ChimeProd
+    steps:
+      - run: echo ${{steps.npm_tag.outputs.npm_tag}}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Checkout Package
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install the Chime SDK
+        run: |
+          current_version=$(.github/script/get-current-version)
+          cd demos/browser
+          npm uninstall amazon-chime-sdk-js
+          npm install ../../amazon-chime-sdk-js-$current_version.tgz
+      - name: Install SAM CLI
+        run: script/github-action-awscli-installation
+      - name: Run Deployment Script
+        run: script/postrelease
   deploy_chime_prod_demo_iad:
     needs: publish
     name: Prod - ChimeSDKMeetings Client - Deploy the Serverless Meeting Demos
-      runs-on: ubuntu-latest
-      env:
-        AWS_DEFAULT_REGION: us-east-1
-        AWS_DEFAULT_OUTPUT: text
-        NAME: ChimeSDKMeetingsProdIAD
-      steps:
-        - run: echo ${{steps.npm_tag.outputs.npm_tag}}
-        - name: Configure AWS Credentials
-          uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
-            aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-            aws-region: us-east-1
-        - name: Checkout Package
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-        - name: Install the Chime SDK
-          run: |
-            current_version=$(.github/script/get-current-version)
-            cd demos/browser
-            npm uninstall amazon-chime-sdk-js
-            npm install ../../amazon-chime-sdk-js-$current_version.tgz
-        - name: Install SAM CLI
-          run: script/github-action-awscli-installation
-        - name: Run Deployment Script
-          run: script/postrelease
+    runs-on: ubuntu-latest
+    env:
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_DEFAULT_OUTPUT: text
+      NAME: ChimeSDKMeetingsProdIAD
+    steps:
+      - run: echo ${{steps.npm_tag.outputs.npm_tag}}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Checkout Package
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install the Chime SDK
+        run: |
+          current_version=$(.github/script/get-current-version)
+          cd demos/browser
+          npm uninstall amazon-chime-sdk-js
+          npm install ../../amazon-chime-sdk-js-$current_version.tgz
+      - name: Install SAM CLI
+        run: script/github-action-awscli-installation
+      - name: Run Deployment Script
+        run: script/postrelease
