@@ -20,8 +20,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: NPM Install
         run: npm install
-      - name: NPM run build
-        run: npm run build
       - name: Get npm tag name if needed
         id: npm_tag
         run: |
