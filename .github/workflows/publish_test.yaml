@@ -12,8 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Package
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.25.0
         with:
+          name: aws/amazon-chime-sdk-js
           ref: 0
       - name: Setup Node environment
         uses: actions/setup-node@v1
