@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Package
-        uses: actions/checkout@main
+        uses: actions/checkout@v2
         with:
           ref: 0
       - name: Setup Node environment
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
@@ -32,7 +32,7 @@ jobs:
           echo ::set-output name=npm_tag::$pre_release_name
   deploy_chime_prod_demo:
     needs: publish
-    name: Prod - ChimeSDKMeetings Client - Deploy the Serverless Meeting Demos
+    name: Prod - Chime Client - Deploy the Serverless Meeting Demos
     runs-on: ubuntu-latest
     env:
       AWS_DEFAULT_REGION: us-east-1
