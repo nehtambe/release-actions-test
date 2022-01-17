@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout Package
         uses: actions/checkout@v2
-        with:
-          ref: 0
       - name: Setup Node environment
         uses: actions/setup-node@v2
         with:
