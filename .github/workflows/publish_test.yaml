@@ -53,7 +53,7 @@ jobs:
           current_version=$(.github/script/get-current-version)
           cd demos/browser
           npm uninstall amazon-chime-sdk-js
-          npm install amazon-chime-sdk-js-$current_version
+          npm install amazon-chime-sdk-js@$current_version
       - name: Install SAM CLI
         run: script/github-action-awscli-installation
       - name: Run Deployment Script
@@ -85,7 +85,7 @@ jobs:
           current_version=$(.github/script/get-current-version)
           cd demos/browser
           npm uninstall amazon-chime-sdk-js
-          npm install amazon-chime-sdk-js-$current_version
+          npm install amazon-chime-sdk-js@$current_version
       - name: Install SAM CLI
         run: script/github-action-awscli-installation
       - name: Run Deployment Script
