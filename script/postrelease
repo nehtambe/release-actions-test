@@ -10,7 +10,7 @@ ChimeProd)
 echo "Deploying to prod stage for canary that talks to prod Chime client"
 
 npm run deploy -- -b chime-sdk-demo-prod-canary -o chime-sdk-demo-prod-canary -s chime-sdk-demo-prod-canary -u false -t -l
-npm run npm run deploy -- -b chime-sdk-meeting-readiness-checker-prod-canary -s chime-sdk-meeting-readiness-checker-prod-canary -a meetingReadinessChecker -u false -t -l
+npm run deploy -- -b chime-sdk-meeting-readiness-checker-prod-canary -s chime-sdk-meeting-readiness-checker-prod-canary -a meetingReadinessChecker -u false -t -l
 ;;
 
 # Uses ChimeSDKMeetings client
