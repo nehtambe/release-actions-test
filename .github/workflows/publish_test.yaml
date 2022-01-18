@@ -46,7 +46,7 @@ jobs:
       - name: Checkout Package
         uses: actions/checkout@v2
         with:
-          name: aws/amazon-chime-sdk-js
+          repository: aws/amazon-chime-sdk-js
           fetch-depth: 0
       - name: Install the Chime SDK
         run: |
@@ -78,7 +78,7 @@ jobs:
       - name: Checkout Package
         uses: actions/checkout@v2
         with:
-          name: aws/amazon-chime-sdk-js
+          repository: aws/amazon-chime-sdk-js
           fetch-depth: 0
       - name: Install the Chime SDK
         run: |
