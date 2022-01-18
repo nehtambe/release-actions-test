@@ -13,7 +13,7 @@ ChimeProd)
     npm run deploy -- -b chime-sdk-meeting-readiness-checker-prod-canary -s chime-sdk-meeting-readiness-checker-prod-canary -a meetingReadinessChecker -u false -t -l
     ;;
 
-ChimeSDKMeetingsGamma)
+ChimeSDKMeetingsProdIAD)
     echo "Deploying to prod IAD stage for canary that talks to prod IAD ChimeSDKMeetings client"
 
     # Uses ChimeSDKMeetings client
