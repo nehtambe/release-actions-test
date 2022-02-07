@@ -30,15 +30,13 @@ jobs:
     steps:
       - name: Echo npm version
         run: echo "Pre release name:" ${{ github.event.release.tag_name }}
-      - name: Checkout Package
-        uses: actions/checkout@v2
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.PROD_AWS_SESSION_TOKEN }}
-          aws-region: us-east-1
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
+#          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+#          aws-session-token: ${{ secrets.PROD_AWS_SESSION_TOKEN }}
+#          aws-region: us-east-1
       - name: Checkout Package
         uses: actions/checkout@v2
         with:
@@ -72,13 +70,13 @@ jobs:
         run: echo "Pre release name:" ${{ github.event.release.tag_name }}
       - name: Checkout Package
         uses: actions/checkout@v2
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.PROD_AWS_SESSION_TOKEN }}
-          aws-region: us-east-1
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
+#          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+#          aws-session-token: ${{ secrets.PROD_AWS_SESSION_TOKEN }}
+#          aws-region: us-east-1
 #      - name: Checkout Package
 #        uses: actions/checkout@v2
 #        with:
