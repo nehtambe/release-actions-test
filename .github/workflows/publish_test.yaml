@@ -29,28 +29,28 @@ jobs:
       NAME: ChimeProd
     steps:
       - name: Echo npm version
-        run: echo "Pre release name:" ${{ github.event.release.tag_name }}
+        run: echo "Pre release name:" ${{ github.event.release.tag_name:1}}
       - name: Checkout Package
         uses: actions/checkout@v2
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.PROD_AWS_SESSION_TOKEN }}
-          aws-region: us-east-1
-      - name: Checkout Package
-        uses: actions/checkout@v2
-        with:
-          repository: aws/amazon-chime-sdk-js
-          ref: v${{ github.event.release.tag_name }}
-          fetch-depth: 0
-      - name: Install the Chime SDK
-        run: |
-          current_version=${{ github.event.release.tag_name }}
-          cd demos/browser
-          npm uninstall amazon-chime-sdk-js
-          npm install amazon-chime-sdk-js@$current_version
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
+#          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+#          aws-session-token: ${{ secrets.PROD_AWS_SESSION_TOKEN }}
+#          aws-region: us-east-1
+#      - name: Checkout Package
+#        uses: actions/checkout@v2
+#        with:
+#          repository: aws/amazon-chime-sdk-js
+#          ref: v${{ github.event.release.tag_name }}
+#          fetch-depth: 0
+#      - name: Install the Chime SDK
+#        run: |
+#          current_version=${{ github.event.release.tag_name }}
+#          cd demos/browser
+#          npm uninstall amazon-chime-sdk-js
+#          npm install amazon-chime-sdk-js@$current_version
   deploy_chime_prod_demo_iad:
     needs: publish
     name: Prod - ChimeSDKMeetings Client - Deploy the Serverless Meeting Demos
@@ -61,25 +61,25 @@ jobs:
       NAME: ChimeSDKMeetingsProdIAD
     steps:
       - name: Echo npm version
-        run: echo "Pre release name:" ${{ github.event.release.tag_name }}
+        run: echo "Pre release name:" ${{ github.event.release.tag_name }}:1
       - name: Checkout Package
         uses: actions/checkout@v2
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.PROD_AWS_SESSION_TOKEN }}
-          aws-region: us-east-1
-      - name: Checkout Package
-        uses: actions/checkout@v2
-        with:
-          repository: aws/amazon-chime-sdk-js
-          ref: v${{ github.event.release.tag_name }}
-          fetch-depth: 0
-      - name: Install the Chime SDK
-        run: |
-          current_version=${{ github.event.release.tag_name }}
-          cd demos/browser
-          npm uninstall amazon-chime-sdk-js
-          npm install amazon-chime-sdk-js@$current_version
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
+#          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+#          aws-session-token: ${{ secrets.PROD_AWS_SESSION_TOKEN }}
+#          aws-region: us-east-1
+#      - name: Checkout Package
+#        uses: actions/checkout@v2
+#        with:
+#          repository: aws/amazon-chime-sdk-js
+#          ref: v${{ github.event.release.tag_name }}
+#          fetch-depth: 0
+#      - name: Install the Chime SDK
+#        run: |
+#          current_version=${{ github.event.release.tag_name }}
+#          cd demos/browser
+#          npm uninstall amazon-chime-sdk-js
+#          npm install amazon-chime-sdk-js@$current_version
