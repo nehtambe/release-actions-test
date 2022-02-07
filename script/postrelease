@@ -2,6 +2,7 @@
 set -euxo pipefail
 
 cd $GITHUB_WORKSPACE/demos/serverless
+npm ci
 
 case $NAME in
 
