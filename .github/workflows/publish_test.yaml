@@ -57,6 +57,8 @@ jobs:
         run: |
           demo_current_version=$(.github/script/get-demo-browser-current-version)
           echo "Current demo version:" $demo_current_version
+      - name: Run Deployment Script
+        run: script/postrelease
   deploy_chime_prod_demo_iad:
     needs: publish
     name: Prod - ChimeSDKMeetings Client - Deploy the Serverless Meeting Demos
@@ -89,3 +91,14 @@ jobs:
 #          cd demos/browser
 #          npm uninstall amazon-chime-sdk-js
 #          npm install amazon-chime-sdk-js@$current_version
+      - name: Install the Chime SDK
+        run: |
+          current_version=2.24.0
+          npm uninstall amazon-chime-sdk-js
+          npm install amazon-chime-sdk-js@$current_version
+      - name: Verify npm version
+        run: |
+          demo_current_version=$(.github/script/get-demo-browser-current-version)
+          echo "Current demo version:" $demo_current_version
+      - name: Run Deployment Script
+        run: script/postrelease
