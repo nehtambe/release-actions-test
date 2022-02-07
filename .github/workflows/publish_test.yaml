@@ -19,8 +19,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: NPM Install
         run: npm install
-      - name: NPM run build
-        run: npm run build
   deploy_chime_prod_demo:
     needs: publish
     name: Prod - Chime Client - Deploy the Serverless Meeting Demos
