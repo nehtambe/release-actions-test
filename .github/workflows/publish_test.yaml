@@ -96,7 +96,14 @@ jobs:
 #          npm install amazon-chime-sdk-js@$current_version
       - name: Verify npm version
         run: |
-          demo_current_version=$(.github/script/get-demo-browser-current-version)
+          demo_current_version=^2.25.0
           echo "Current demo version:" $demo_current_version
-      - name: Run Deployment Script
-        run: script/postrelease
+          if "$demo_current_version" != "^#${{ steps.npm_version.outputs.npm_version }}"
+          then
+            echo "npm version is not the same as the current version"
+          else
+            echo "Deploy script"
+            script/postrelease
+          fi
+#      - name: Run Deployment Script
+#        run: script/postrelease
