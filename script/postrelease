@@ -16,10 +16,18 @@ ChimeProd)
     ;;
 
 ChimeSDKMeetingsProdIAD)
-    echo "Deploying to prod IAD stage for canary that talks to prod IAD ChimeSDKMeetings client"
+    echo "Deploying to prod stage for canary that talks to prod IAD ChimeSDKMeetings client"
 
     # Uses ChimeSDKMeetings client
     #npm run deploy -- -r us-east-1 -b chime-sdk-meetings-demo-prod-canary-us-east-1 -o chime-sdk-meetings-iad-demo-prod-canary -s chime-sdk-meetings-demo-prod-canary-us-east-1 -t -l
+    npm install amazon-chime-sdk-js@2.25.0
+    ;;
+
+ChimeSDKMeetingsProdPDX)
+    echo "Deploying to prod stage for canary that talks to prod PDX ChimeSDKMeetings client"
+
+    # Uses ChimeSDKMeetings client
+    #npm run deploy -- -r us-west-2 -b chime-sdk-meetings-demo-prod-canary-us-west-2 -o chime-sdk-meetings-pdx-demo-prod-canary -s chime-sdk-meetings-demo-prod-canary-us-west-2 -t -l
     npm install amazon-chime-sdk-js@2.25.0
     ;;
 
