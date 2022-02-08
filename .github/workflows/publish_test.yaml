@@ -98,7 +98,7 @@ jobs:
         run: |
           demo_current_version=^2.25.0
           echo "Current demo version:" $demo_current_version
-          if "$demo_current_version" != "^#${{ steps.npm_version.outputs.npm_version }}"
+          if [[ *$demo_current_version* != "#${{ steps.npm_version.outputs.npm_version }}" ]];
           then
             echo "npm version is not the same as the current version"
           else
