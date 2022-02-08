@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
 
-cd $GITHUB_WORKSPACE/demos/serverless
+#cd $GITHUB_WORKSPACE/demo/serverless
 npm ci
 
 case $NAME in
@@ -10,15 +10,17 @@ ChimeProd)
     echo "Deploying to prod stage for canary that talks to prod Chime client"
 
     # Uses Chime Client
-    npm run deploy -- -b chime-sdk-demo-prod-canary -o chime-sdk-demo-prod-canary -s chime-sdk-demo-prod-canary -u false -t -l
-    npm run deploy -- -b chime-sdk-meeting-readiness-checker-prod-canary -s chime-sdk-meeting-readiness-checker-prod-canary -a meetingReadinessChecker -u false -t -l
+    # npm run deploy -- -b chime-sdk-demo-prod-canary -o chime-sdk-demo-prod-canary -s chime-sdk-demo-prod-canary -u false -t -l
+    # npm run deploy -- -b chime-sdk-meeting-readiness-checker-prod-canary -s chime-sdk-meeting-readiness-checker-prod-canary -a meetingReadinessChecker -u false -t -l
+    npm install amazon-chime-sdk-js@2.25.0
     ;;
 
 ChimeSDKMeetingsProdIAD)
     echo "Deploying to prod IAD stage for canary that talks to prod IAD ChimeSDKMeetings client"
 
     # Uses ChimeSDKMeetings client
-    npm run deploy -- -r us-east-1 -b chime-sdk-meetings-demo-prod-canary-us-east-1 -o chime-sdk-meetings-iad-demo-prod-canary -s chime-sdk-meetings-demo-prod-canary-us-east-1 -t -l
+    #npm run deploy -- -r us-east-1 -b chime-sdk-meetings-demo-prod-canary-us-east-1 -o chime-sdk-meetings-iad-demo-prod-canary -s chime-sdk-meetings-demo-prod-canary-us-east-1 -t -l
+    npm install amazon-chime-sdk-js@2.25.0
     ;;
 
 esac
