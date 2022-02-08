@@ -23,13 +23,10 @@ jobs:
     needs: publish
     name: Prod - Chime Client - Deploy the Serverless Meeting Demos
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        name: [ ChimeProd, ChimeSDKMeetingsProdIAD, ChimeSDKMeetingsProdPDX]
     env:
       AWS_DEFAULT_REGION: us-east-1
       AWS_DEFAULT_OUTPUT: text
-      NAME: ${{ matrix.name }}
+      NAME: ChimeProd
     steps:
       - name: Echo npm version
         run: echo "Pre release name:" ${{ github.event.release.tag_name }}
@@ -62,19 +59,22 @@ jobs:
           echo "Current demo version:" $demo_current_version
       - name: Run Deployment Script
         run: script/postrelease
-#  deploy_chime_prod_demo_iad:
-#    needs: publish
-#    name: Prod - ChimeSDKMeetings Client - Deploy the Serverless Meeting Demos
-#    runs-on: ubuntu-latest
-#    env:
-#      AWS_DEFAULT_REGION: us-east-1
-#      AWS_DEFAULT_OUTPUT: text
-#      NAME: ChimeSDKMeetingsProdIAD
-#    steps:
-#      - name: Echo npm version
-#        run: echo "Pre release name:" ${{ github.event.release.tag_name }}
-#      - name: Checkout Package
-#        uses: actions/checkout@v2
+  deploy_chime_prod_demo_iad:
+    needs: publish
+    name: Prod - ChimeSDKMeetings Client - Deploy the Serverless Meeting Demos
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        name: [ ChimeSDKMeetingsProdIAD, ChimeSDKMeetingsProdPDX ]
+    env:
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_DEFAULT_OUTPUT: text
+      NAME: ${{ matrix.name }}
+    steps:
+      - name: Echo npm version
+        run: echo "Pre release name:" ${{ github.event.release.tag_name }}
+      - name: Checkout Package
+        uses: actions/checkout@v2
 #      - name: Configure AWS Credentials
 #        uses: aws-actions/configure-aws-credentials@v1
 #        with:
@@ -94,9 +94,9 @@ jobs:
 #          cd demos/browser
 #          npm uninstall amazon-chime-sdk-js
 #          npm install amazon-chime-sdk-js@$current_version
-#      - name: Verify npm version
-#        run: |
-#          demo_current_version=$(.github/script/get-demo-browser-current-version)
-#          echo "Current demo version:" $demo_current_version
-#      - name: Run Deployment Script
-#        run: script/postrelease
+      - name: Verify npm version
+        run: |
+          demo_current_version=$(.github/script/get-demo-browser-current-version)
+          echo "Current demo version:" $demo_current_version
+      - name: Run Deployment Script
+        run: script/postrelease
