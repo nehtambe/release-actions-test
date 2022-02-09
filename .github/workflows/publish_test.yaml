@@ -41,7 +41,7 @@ jobs:
           wait_time=0
           while :
           do
-            if [$wait_time -ge $max_wait_time]
+            if [[ $wait_time -ge $max_wait_time ]]
             then
               echo "Version is not published to npm": $current_version
               exit 1
