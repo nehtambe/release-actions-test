@@ -46,7 +46,7 @@ jobs:
               exit 1
             fi
             echo $wait_time
-            npm_version=$(npm view amazon-chime-sdk-js@${{ github.event.release.tag_name }} version)
+            npm_version=$(npm view amazon-chime-sdk-js@#${{ github.event.release.tag_name }} version)
             if [[ *$npm_version* = *$version* ]]
             then
               echo "Version is published to npm"
