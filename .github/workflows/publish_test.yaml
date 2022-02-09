@@ -35,19 +35,20 @@ jobs:
         run: echo "Pre release name:" ${{ github.event.release.tag_name }}
       - name: Verify and wait until npm version is available
         run: |
-          version=2.4.0
+          tag_name = ${{ github.event.release.tag_name }}
+          current_version=${tag_name:1}
           max_wait_time=10
           wait_time=0
           while :
           do
             if [$wait_time -ge $max_wait_time]
             then
-              echo "Version is not published to npm": $version
+              echo "Version is not published to npm": $current_version
               exit 1
             fi
             echo $wait_time
-            npm_version=$(npm view amazon-chime-sdk-js@#${{ github.event.release.tag_name }} version)
-            if [[ *$npm_version* = *$version* ]]
+            npm_version=$(npm view amazon-chime-sdk-js@$current_version version)
+            if [[ *$npm_version* = *$current_version* ]]
             then
               echo "Version is published to npm"
               break
