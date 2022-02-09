@@ -21,51 +21,11 @@ jobs:
         run: npm install
   deploy_chime_prod_demo:
     needs: publish
-    name: Prod - Chime Client - Deploy the Serverless Meeting Demos
-    runs-on: ubuntu-latest
-    env:
-      AWS_DEFAULT_REGION: us-east-1
-      AWS_DEFAULT_OUTPUT: text
-      NAME: ChimeProd
-    steps:
-      - name: Echo npm version
-        run: echo "Pre release name:" ${{ github.event.release.tag_name }}
-#      - name: Configure AWS Credentials
-#        uses: aws-actions/configure-aws-credentials@v1
-#        with:
-#          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY }}
-#          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-#          aws-session-token: ${{ secrets.PROD_AWS_SESSION_TOKEN }}
-#          aws-region: us-east-1
-      - name: Checkout Package
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.release.tag_name }}
-          fetch-depth: 0
-#      - name: Checkout Package
-#        uses: actions/checkout@v2
-#        with:
-#          repository: aws/amazon-chime-sdk-js
-#          ref: v${{ github.event.release.tag_name }}
-#          fetch-depth: 0
-#      - name: Install the Chime SDK
-#        run: |
-#          current_version=2.24.0
-#          npm uninstall amazon-chime-sdk-js
-#          npm install amazon-chime-sdk-js@$current_version
-      - name: Verify npm version
-        run: |
-          demo_current_version=$(.github/script/get-demo-browser-current-version)
-          echo "Current demo version:" $demo_current_version
-      - name: Run Deployment Script
-        run: script/postrelease
-  deploy_chime_prod_demo_iad:
-    needs: publish
     name: Prod - ChimeSDKMeetings Client - Deploy the Serverless Meeting Demos
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        name: [ ChimeSDKMeetingsProdIAD, ChimeSDKMeetingsProdPDX ]
+        name: [ ChimeProd, ChimeSDKMeetingsProdIAD, ChimeSDKMeetingsProdPDX ]
     env:
       AWS_DEFAULT_REGION: us-east-1
       AWS_DEFAULT_OUTPUT: text
@@ -73,6 +33,29 @@ jobs:
     steps:
       - name: Echo npm version
         run: echo "Pre release name:" ${{ github.event.release.tag_name }}
+      - name: Verify and wait until npm version is available
+        run: |
+          version=2.4.0
+          max_wait_time=20
+          wait_time=0
+          while :
+          do
+            if [$wait_time -ge $max_wait_time]
+            then
+              echo "Version is not published to npm": $version
+              exit 1
+            fi
+            echo $wait_time
+            npm_version=$(npm view amazon-chime-sdk-js@${{ github.event.release.tag_name }} version)
+            if [[ *$npm_version* = *$version* ]]
+            then
+              echo "Version is published to npm"
+              break
+            fi
+
+            sleep 5
+            wait_time= wait_time+5
+            done
       - name: Checkout Package
         uses: actions/checkout@v2
 #      - name: Configure AWS Credentials
