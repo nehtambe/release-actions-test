@@ -36,7 +36,7 @@ jobs:
       - name: Verify and wait until npm version is available
         run: |
           version=2.4.0
-          max_wait_time=20
+          max_wait_time=10
           wait_time=0
           while :
           do
@@ -53,8 +53,8 @@ jobs:
               break
             fi
 
-            sleep 5
-            wait_time= wait_time+5
+            sleep 2
+            wait_time=$((wait_time+2))
             done
       - name: Checkout Package
         uses: actions/checkout@v2
